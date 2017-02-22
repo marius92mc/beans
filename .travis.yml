@@ -8,6 +8,12 @@ matrix:
           python: 3.6
         - env: TOXENV=pypy
 install: pip install tox
+before_script:
+    - curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-145.0.0-linux-x86_64.tar.gz > google-cloud-sdk.tar.gz
+    - tar -xvf google-cloud-sdk.tar.gz
+    - yes | ./google-cloud-sdk/install.sh
+    - ./google-cloud-sdk/bin/gcloud init
+    - gcloud components install app-engine-python
 script: tox
 cache:
     directories:
